@@ -11,11 +11,11 @@ const mongodb = new MongoClient(process.env.MONGODB_URL);
 const channel = new Channel(new ChannelCollection(revolt), "01H3XKRYDB3RV5P0EM633C0QXY");
 
 revolt.on("ready", async () => {
-    console.info(`Logged in on Revolt as ${revolt.user.username}`)
+    console.info(`Logged in on Revolt as ${revolt.user.username}`);
 });
 
 meower.onLogin(() => {
-    console.info(`Logged in on Meower as ${process.env.MEOWER_USERNAME}`)
+    console.info(`Logged in on Meower as ${process.env.MEOWER_USERNAME}`);
 });
 
 meower.onPost(async (u, p, o) => {

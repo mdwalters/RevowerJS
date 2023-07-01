@@ -33,8 +33,15 @@ revolt.on("messageCreate", async (message) => {
     const channel = await db.collection("bridges").findOne({ revolt_channel: message.channelId });
 
     if (message.username == revolt.user.username) return;
-    if (message.content.startsWith("!!")) return;
-    if (!user) message.reply("You don't have your account linked!");
+    if (message.content.startsWith("!!")) {
+        await message.react("01GKGAV2T69EVPMRGYFDPKTXY0");
+        return;
+    }
+    if (!user) {
+        await message.react("01GKGATQ93ZR2K2901HVV444YC");
+        message.reply("You don't have your account linked!");
+        return;
+    }
 
     await message.react("01GKG7NFRVYKXMN3APJHPM2EW4");
     meower.post(`${user.meower_username}: ${message.content}`, (channel.meower_gc == "home" ? null : channel.meower_gc));

@@ -36,6 +36,7 @@ revolt.on("messageCreate", async (message) => {
     // const replies = [""];
 
     if (message.username == revolt.user.username) return;
+    if (!channel) return;
     if (message.content.startsWith("!!")) {
         await message.react("01GKGAV2T69EVPMRGYFDPKTXY0");
         return;

@@ -70,7 +70,7 @@ revolt.on("messageCreate", async (message) => {
             }).then(res => res.json());
             attachments.push(`[${message.attachments[i].url.split("/")[5]}: ${response.full_url}]`);
         }
-        attachments.push(" ");
+        attachments.push("");
         await message.unreact("01GKG6WJ437NZQ50A8BHJEV45G");
     }
 

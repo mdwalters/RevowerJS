@@ -65,9 +65,9 @@ revolt.on("messageCreate", async (message) => {
         attachments.pop();
         for (let i in message.attachments) {
             const response = await fetch("https://go.meower.org/submit", {
-	            method: "post",
+                method: "post",
                 body: JSON.stringify({ "link": message.attachments[i].url }),
-	            headers: { "Authorization": process.env.MEOWER_URL_SHORTENER_KEY, "Content-Type": "application/json" }
+                headers: { "Authorization": process.env.MEOWER_URL_SHORTENER_KEY, "Content-Type": "application/json" }
             }).then(res => res.json());
             attachments.push(`[${message.attachments[i].url.split("/")[5]}: ${response.full_url}]`);
         }

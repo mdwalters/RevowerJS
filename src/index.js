@@ -1,5 +1,5 @@
 import Bot from "meowerbot";
-import { Client, Channel, ChannelCollection, Message, MessageCollection } from "revolt.js";
+import { Client, Channel, ChannelCollection } from "revolt.js"; // We need Message and MessageCollection for replies, but that's commented out for now
 import { MongoClient } from "mongodb";
 import * as dotenv from "dotenv";
 import fetch from "node-fetch";

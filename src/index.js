@@ -24,7 +24,7 @@ meower.onPost(async (u, p, o) => {
     if (!gc) return;
 
     for (let i in gc) {
-        const channel = new Channel(new ChannelCollection(revolt), gc.revolt_channel);
+        const channel = new Channel(new ChannelCollection(revolt), gc[i].revolt_channel);
         // const user = await fetch(`https://api.meower.org/users/${u}`).then(res => res.json());
 
         await channel.sendMessage({

@@ -22,7 +22,7 @@ meower.onLogin(() => {
 meower.onPost(async (u, p, o) => {
     const gc = await db.collection("bridges").findOne({ meower_gc: (o == null ? "home" : o) });
     const channel = new Channel(new ChannelCollection(revolt), gc.revolt_channel);
-    const user = await fetch(`https://api.meower.org/users/${u}`).then(res => res.json());
+    // const user = await fetch(`https://api.meower.org/users/${u}`).then(res => res.json());
 
     if (!gc) return;
 

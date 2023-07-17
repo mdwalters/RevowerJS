@@ -20,19 +20,21 @@ meower.onLogin(() => {
 });
 
 meower.onPost(async (u, p, o) => {
-    const gc = await db.collection("bridges").findOne({ meower_gc: (o == null ? "home" : o) });
-    const channel = new Channel(new ChannelCollection(revolt), gc.revolt_channel);
-    // const user = await fetch(`https://api.meower.org/users/${u}`).then(res => res.json());
-
+    const gc = await db.collection("bridges").find({ meower_gc: (o == null ? "home" : o) }).toArray();
     if (!gc) return;
 
-    await channel.sendMessage({
-        "content": p,
-        "masquerade": {
-            "name": u,
-            "avatar": "https://assets.meower.org/PFP/err.png" // https://raw.githubusercontent.com/BetterMeower/BetterMeower-Svelte/main/src/assets/avatars/icon_${user.pfp_data - 1}.svg
-        }
-    });
+    for (let i in gc) {
+        const channel = new Channel(new ChannelCollection(revolt), gc.revolt_channel);
+        // const user = await fetch(`https://api.meower.org/users/${u}`).then(res => res.json());
+
+        await channel.sendMessage({
+            "content": p,
+            "masquerade": {
+                "name": u,
+                "avatar": "https://assets.meower.org/PFP/err.png" // https://raw.githubusercontent.com/BetterMeower/BetterMeower-Svelte/main/src/assets/avatars/icon_${user.pfp_data - 1}.svg
+            }
+        });
+    }
 });
 
 

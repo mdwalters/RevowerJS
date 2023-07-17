@@ -37,10 +37,7 @@ revolt.on("messageCreate", async (message) => {
 
     if (message.username == revolt.user.username) return;
     if (!channel) return;
-    if (message.content.startsWith("!!")) {
-        await message.react("01GKGAV2T69EVPMRGYFDPKTXY0");
-        return;
-    }
+    if (message.content.startsWith("!!")) return;
     if (!user) {
         await message.react("01GKGATQ93ZR2K2901HVV444YC");
         message.reply("You don't have your account linked!");
@@ -61,7 +58,6 @@ revolt.on("messageCreate", async (message) => {
         */
     }
     if (message.attachments) {
-        await message.react("01GKG6WJ437NZQ50A8BHJEV45G");
         attachments.pop();
         for (let i in message.attachments) {
             const response = await fetch("https://go.meower.org/submit", {
@@ -72,7 +68,6 @@ revolt.on("messageCreate", async (message) => {
             attachments.push(`[${message.attachments[i].url.split("/")[5]}: ${response.full_url}]`);
         }
         attachments.push("");
-        await message.unreact("01GKG6WJ437NZQ50A8BHJEV45G");
     }
 
     await message.react("01GKG7NFRVYKXMN3APJHPM2EW4");

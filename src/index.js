@@ -22,10 +22,17 @@ meower.onLogin(() => {
 meower.onPost(async (u, p, o) => {
     const gc = await db.collection("bridges").findOne({ meower_gc: (o == null ? "home" : o) });
     const channel = new Channel(new ChannelCollection(revolt), gc.revolt_channel);
+    const user = await fetch(`https://api.meower.org/users/${u}`).then(res => res.json());
 
     if (!gc) return;
 
-    await channel.sendMessage(`${u}: ${p}`);
+    await channel.sendMessage({
+        "content": p,
+        "masquerade": {
+            "name": u,
+            "avatar": `https://assets.meower.org/PFP/err.png` // https://raw.githubusercontent.com/BetterMeower/BetterMeower-Svelte/main/src/assets/avatars/icon_${user.pfp_data - 1}.svg
+        }
+    });
 });
 
 
@@ -35,7 +42,7 @@ revolt.on("messageCreate", async (message) => {
     const attachments = [""];
     const replies = [""];
 
-    if (message.username == revolt.user.username) return;
+    if (message.username == revolt.user.username || message.authorId == revolt.user.id) return;
     if (!channel) return;
     if (message.content.startsWith("!!")) return;
     if (!user) {

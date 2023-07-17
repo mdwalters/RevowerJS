@@ -30,7 +30,7 @@ meower.onPost(async (u, p, o) => {
         "content": p,
         "masquerade": {
             "name": u,
-            "avatar": `https://assets.meower.org/PFP/err.png` // https://raw.githubusercontent.com/BetterMeower/BetterMeower-Svelte/main/src/assets/avatars/icon_${user.pfp_data - 1}.svg
+            "avatar": "https://assets.meower.org/PFP/err.png" // https://raw.githubusercontent.com/BetterMeower/BetterMeower-Svelte/main/src/assets/avatars/icon_${user.pfp_data - 1}.svg
         }
     });
 });

@@ -33,7 +33,7 @@ revolt.on("messageCreate", async (message) => {
     const user = await db.collection("users").findOne({ revolt_id: message.authorId });
     const channel = await db.collection("bridges").findOne({ revolt_channel: message.channelId });
     const attachments = [""];
-    // const replies = [""];
+    const replies = [""];
 
     if (message.username == revolt.user.username) return;
     if (!channel) return;
@@ -43,9 +43,7 @@ revolt.on("messageCreate", async (message) => {
         message.reply("You don't have your account linked!");
         return;
     }
-    if (message.replyIds) {
-        message.reply("Replying to posts don't work yet, however, your post was sent anyways :trol:");
-        /*
+    /* if (message.replyIds) {
         replies.pop();
         for (let i in message.replyIds) {
             const reply_message = new Message(new MessageCollection(revolt), message.replyIds[i]);
@@ -55,8 +53,7 @@ revolt.on("messageCreate", async (message) => {
         }
 
         replies.push(" ");
-        */
-    }
+    } */
     if (message.attachments) {
         attachments.pop();
         for (let i in message.attachments) {

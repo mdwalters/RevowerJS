@@ -25,13 +25,12 @@ meower.onPost(async (u, p, o) => {
 
     for (let i in gc) {
         const channel = new Channel(new ChannelCollection(revolt), gc[i].revolt_channel);
-        // const user = await fetch(`https://api.meower.org/users/${u}`).then(res => res.json());
 
         await channel.sendMessage({
             "content": p,
             "masquerade": {
                 "name": u,
-                "avatar": "https://assets.meower.org/PFP/err.png" // https://raw.githubusercontent.com/BetterMeower/BetterMeower-Svelte/main/src/assets/avatars/icon_${user.pfp_data - 1}.svg
+                "avatar": "https://assets.meower.org/PFP/err.png"
             }
         });
     }
@@ -42,7 +41,7 @@ revolt.on("messageCreate", async (message) => {
     const user = await db.collection("users").findOne({ revolt_id: message.authorId });
     const channel = await db.collection("bridges").findOne({ revolt_channel: message.channelId });
     const attachments = [""];
-    const replies = [""];
+    // const replies = [""];
 
     if (message.username == revolt.user.username || message.authorId == revolt.user.id) return;
     if (!channel) return;

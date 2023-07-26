@@ -20,7 +20,7 @@
     "express": "^4.18.2",
     "meowerbot": "^2023.5.22",
     "mongodb": "^5.7.0",
-    "node-fetch": "^3.3.1",
+    "node-fetch": "^3.3.2",
     "revolt.js": "7.0.0-beta.9"
   }
 }

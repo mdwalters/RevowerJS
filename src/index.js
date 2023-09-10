@@ -79,5 +79,9 @@ revolt.on("messageCreate", async (message) => {
     meower.post(`${user.meower_username}: ${attachments.join(" ")}${message.content}`, (channel.meower_gc == "home" ? null : channel.meower_gc));
 });
 
+meower.onClose(() => {
+    meower.login(process.env.MEOWER_USERNAME, process.env.MEOWER_PASSWORD);
+});
+
 revolt.loginBot(process.env.REVOLT_TOKEN);
 meower.login(process.env.MEOWER_USERNAME, process.env.MEOWER_PASSWORD);

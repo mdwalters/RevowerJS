@@ -17,9 +17,6 @@ dependencies:
   mongodb:
     specifier: ^5.7.0
     version: 5.7.0
-  node-fetch:
-    specifier: ^3.3.1
-    version: 3.3.1
   revolt.js:
     specifier: 7.0.0-beta.9
     version: 7.0.0-beta.9(typescript@5.1.6)

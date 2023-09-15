@@ -2,13 +2,12 @@ import Bot from "meowerbot";
 import { Client, Channel, ChannelCollection } from "revolt.js"; // We need Message and MessageCollection for replies, but that's commented out for now
 import { MongoClient } from "mongodb";
 import * as dotenv from "dotenv";
-import fetch from "node-fetch";
 
 dotenv.config();
 
 const meower = new Bot();
 const revolt = new Client();
-const mongodb = new MongoClient(process.env.MONGODB_URL);
+const mongodb = new MongoClient(Deno.env.get("MONGODB_URL"));
 const db = mongodb.db("RevowerJS");
 
 revolt.on("ready", async () => {
@@ -16,7 +15,7 @@ revolt.on("ready", async () => {
 });
 
 meower.onLogin(() => {
-    console.info(`Logged in on Meower as ${process.env.MEOWER_USERNAME}`);
+    console.info(`Logged in on Meower as ${Deno.env.get("MEOWER_USERNAME")}`);
 });
 
 meower.onPost(async (u, p, o) => {
@@ -68,7 +67,7 @@ revolt.on("messageCreate", async (message) => {
             const response = await fetch("https://go.meower.org/submit", {
                 method: "post",
                 body: JSON.stringify({ "link": message.attachments[i].url }),
-                headers: { "Authorization": process.env.MEOWER_URL_SHORTENER_KEY, "Content-Type": "application/json" }
+                headers: { "Authorization": Deno.env.get("MEOWER_URL_SHORTENER_KEY"), "Content-Type": "application/json" }
             }).then(res => res.json());
             attachments.push(`[${message.attachments[i].url.split("/")[5]}: ${response.full_url}]`);
         }
@@ -80,8 +79,8 @@ revolt.on("messageCreate", async (message) => {
 });
 
 meower.onClose(() => {
-    meower.login(process.env.MEOWER_USERNAME, process.env.MEOWER_PASSWORD);
+    meower.login(Deno.env.get("MEOWER_USERNAME"), Deno.env.get("MEOWER_PASSWORD"));
 });
 
-revolt.loginBot(process.env.REVOLT_TOKEN);
-meower.login(process.env.MEOWER_USERNAME, process.env.MEOWER_PASSWORD);
+revolt.loginBot(Deno.env.get("REVOLT_TOKEN"));
+meower.login(Deno.env.get("MEOWER_USERNAME"), Deno.env.get("MEOWER_PASSWORD"));

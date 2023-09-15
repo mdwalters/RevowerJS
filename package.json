@@ -7,11 +7,11 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "start": "node ."
+    "start": "deno run --allow-read --allow-net --allow-env --allow-sys src/index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "M.D. Walters",
+  "license": "MIT",
   "devDependencies": {
     "eslint": "^8.45.0"
   },

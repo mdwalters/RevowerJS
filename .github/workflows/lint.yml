@@ -12,13 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install Deno
-        run: curl -fsSL https://deno.land/x/install/install.sh | sh
       - name: Run linter
-        run: deno lint
+        run: curl -fsSL https://deno.land/x/install/install.sh | sh; deno lint
   fmt:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Run formatter
-        run: deno fmt
+        run: curl -fsSL https://deno.land/x/install/install.sh | sh; deno fmt

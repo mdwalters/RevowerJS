@@ -52,7 +52,6 @@ revolt.on("messageCreate", async (message) => {
         revolt_channel: message.channelId,
     });
     const attachments = [""];
-    // const replies = [""];
 
     if (
         message.username == revolt.user.username ||
@@ -74,10 +73,12 @@ revolt.on("messageCreate", async (message) => {
                 headers: {
                     "Authorization": Deno.env.get("MEOWER_URL_SHORTENER_KEY"),
                     "Content-Type": "application/json",
-                }
+                },
             }).then((res) => res.json());
             attachments.push(
-                `[${message.attachments[i].url.split("/")[5]}: ${response.full_url}]`,
+                `[${
+                    message.attachments[i].url.split("/")[5]
+                }: ${response.full_url}]`,
             );
         }
         attachments.push("");

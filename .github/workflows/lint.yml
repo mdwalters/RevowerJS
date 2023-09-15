@@ -12,9 +12,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install pnpm
-        run: npm install -g pnpm
-      - name: Install Dependencies
-        run: pnpm install
-      - name: Run ESLint
-        run: pnpm lint
+      - name: Run linter
+        run: deno lint

@@ -1,0 +1,10 @@
+{
+    "tasks": {
+        "start": "deno run --allow-read --allow-net --allow-env --allow-sys src/index.js"
+        "start:watch": "deno run --allow-read --allow-net --allow-env --allow-sys --watch src/index.js"
+    },
+    "fmt": {
+        "useTabs": false,
+        "indentWidth": 4,
+    }
+}

@@ -13,10 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run linter
-        run: curl -fsSL https://deno.land/x/install/install.sh | sh; deno lint
+        run: curl -fsSL https://deno.land/x/install/install.sh | sh; export DENO_INSTALL="/home/runner/.deno"; export PATH="$DENO_INSTALL/bin:$PATH"; deno lint
   fmt:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Run formatter
-        run: curl -fsSL https://deno.land/x/install/install.sh | sh; deno fmt
+        run: curl -fsSL https://deno.land/x/install/install.sh | sh; export DENO_INSTALL="/home/runner/.deno"; export PATH="$DENO_INSTALL/bin:$PATH"; deno fmt

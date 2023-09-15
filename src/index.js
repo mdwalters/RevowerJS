@@ -14,7 +14,7 @@ const revolt = new Client();
 const mongodb = new MongoClient(Deno.env.get("MONGODB_URL"));
 const db = mongodb.db("RevowerJS");
 
-revolt.on("ready", async () => {
+revolt.on("ready", () => {
     console.info(`Logged in on Revolt as ${revolt.user.username}`);
 });
 
@@ -28,7 +28,7 @@ meower.onPost(async (u, p, o) => {
     }).toArray();
     if (!gc) return;
 
-    for (let i in gc) {
+    for (const i in gc) {
         const channel = new Channel(
             new ChannelCollection(revolt),
             gc[i].revolt_channel,
@@ -66,7 +66,7 @@ revolt.on("messageCreate", async (message) => {
     }
     if (message.attachments) {
         attachments.pop();
-        for (let i in message.attachments) {
+        for (const i in message.attachments) {
             const response = await fetch("https://go.meower.org/submit", {
                 method: "post",
                 body: JSON.stringify({ "link": message.attachments[i].url }),

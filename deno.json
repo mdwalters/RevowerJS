@@ -1,6 +1,6 @@
 {
     "tasks": {
-        "start": "deno run --allow-all src/main.js"
+        "start": "deno run --allow-all src/main.ts"
     },
     "fmt": {
         "useTabs": false,

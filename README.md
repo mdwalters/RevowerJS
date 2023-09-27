@@ -5,8 +5,7 @@ Deno
 
 ## Running
 
-> **Warning** This repo uses Deno, running RevowerJS with NodeJS might not work
-> due to syntax differences.
+> **Warning** This repo uses Deno, running RevowerJS with NodeJS might not work due to syntax differences.
 
 ```sh
 deno task run

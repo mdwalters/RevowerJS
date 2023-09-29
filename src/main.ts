@@ -22,7 +22,7 @@ meower.onLogin(() => {
     console.info(`Logged in on Meower as ${Deno.env.get("MEOWER_USERNAME")}`);
 });
 
-meower.onPost(async (u, p, o) => {
+meower.onPost(async (u: string, p: string, o: string | null) => {
     const gc = await db.collection("bridges").find({
         meower_gc: (o == null ? "home" : o),
     }).toArray();

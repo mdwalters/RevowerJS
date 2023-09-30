@@ -3,29 +3,39 @@ name: Lint and Format
 on:
   push:
     paths:
+      - '**.js'
       - '**.ts'
+      - '**.md'
+      - '**.json'
+      - '**.jsonc'
   workflow_dispatch:
   pull_request:
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run linter
+      - name: "Checking out repository code"
+        uses: actions/checkout@v3
+
+      - name: "Install Deno"
         run: |
           curl -fsSL https://deno.land/x/install/install.sh | sh
-          export DENO_INSTALL="/home/runner/.deno"
+          export DENO_INSTALL="~/.deno"
           export PATH="$DENO_INSTALL/bin:$PATH"
-          echo "---"
-          deno lint
+      
+      - name: Run linter
+        run: deno lint
   fmt:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run formatter
+      - name: "Checking out repository code"
+        uses: actions/checkout@v3
+
+      - name: "Install Deno"
         run: |
           curl -fsSL https://deno.land/x/install/install.sh | sh
-          export DENO_INSTALL="/home/runner/.deno"
+          export DENI_INSTALL="~/.deno"
           export PATH="$DENO_INSTALL/bin:$PATH"
-          echo "---"
-          deno fmt
+        
+      - name: Run formatter
+        run: deno fmt

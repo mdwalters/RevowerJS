@@ -1,17 +1,17 @@
-import Bot as Meower from "npm:meowerbot@^2023.5.22";
+import Bot from "meowerbot";
 import {
     Channel,
     ChannelCollection,
-    Client as Revolt,
-} from "npm:revolt.js@^7.0.0-beta.9"; // We need Message and MessageCollection for replies, but that's commented out for now
-import { MongoClient } from "npm:mongodb@^6.1.0";
-import * as dotenv from "npm:dotenv@^16.3.1";
+    Client,
+} from "revolt.js"; // We need Message and MessageCollection for replies, but that's commented out for now
+import { MongoClient } from "mongodb";
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
-const meower = new Meower();
-const revolt = new Revolt();
-const mongodb = new MongoClient(Deno.env.get("MONGODB_URL"));
+const meower = new Bot();
+const revolt = new Client();
+const mongodb = new MongoClient(process.env.MONGODB_URL);
 const db = mongodb.db("RevowerJS");
 
 revolt.on("ready", () => {
@@ -19,10 +19,12 @@ revolt.on("ready", () => {
 });
 
 meower.onLogin(() => {
-    console.info(`Logged in on Meower as ${Deno.env.get("MEOWER_USERNAME")}`);
+    console.info(`Logged in on Meower as ${process.env.MEOWER_USERNAME}`);
 });
 
-meower.onPost(async (u: string, p: string, o: string | null) => {
+meower.onMessage((message) => console.log(message.toString()));
+
+meower.onPost(async (u, p, o) => {
     const gc = await db.collection("bridges").find({
         meower_gc: (o == null ? "home" : o),
     }).toArray();
@@ -71,7 +73,7 @@ revolt.on("messageCreate", async (message) => {
                 method: "post",
                 body: JSON.stringify({ "link": message.attachments[i].url }),
                 headers: {
-                    "Authorization": Deno.env.get("MEOWER_URL_SHORTENER_KEY"),
+                    "Authorization": process.env.MEOWER_URL_SHORTENER_KEY,
                     "Content-Type": "application/json",
                 },
             }).then((res) => res.json());
@@ -94,13 +96,13 @@ revolt.on("messageCreate", async (message) => {
 
 meower.onClose(() => {
     meower.login(
-        Deno.env.get("MEOWER_USERNAME"),
-        Deno.env.get("MEOWER_PASSWORD"),
+        process.env.MEOWER_USERNAME,
+        process.env.MEOWER_PASSWORD,
     );
 });
 
-revolt.loginBot(Deno.env.get("REVOLT_TOKEN"));
+revolt.loginBot(process.env.REVOLT_TOKEN);
 meower.login(
-    Deno.env.get("MEOWER_USERNAME"),
-    Deno.env.get("MEOWER_PASSWORD")
+    process.env.MEOWER_USERNAME,
+    process.env.MEOWER_PASSWORD
 );

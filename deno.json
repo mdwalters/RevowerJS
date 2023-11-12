@@ -1,9 +1,0 @@
-{
-    "tasks": {
-        "start": "deno run --allow-all src/main.ts"
-    },
-    "fmt": {
-        "useTabs": false,
-        "indentWidth": 4
-    }
-}
